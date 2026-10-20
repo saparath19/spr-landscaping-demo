@@ -5,7 +5,7 @@ interface Props { filters?: boolean; }
 const {filters=false}=Astro.props;
 ---
 {filters && <div class="filters" role="group" aria-label="Filter sample projects">{['All','Landscape','Hardscape','Outdoor living'].map((f)=><button type="button" data-filter={f} aria-pressed={f==='All'}>{f}</button>)}</div>}
-<div class="projects-grid">{projects.map((p,i)=><article class="project" data-category={p.category}><a href={`/projects/${p.slug}/`} aria-label={`Explore ${p.title}, fictional concept`}><div class="image-wrap"><Photo name={p.image} alt={`${p.title} — stock inspiration, not a completed project`} /><span class="round-arrow" aria-hidden="true">↗</span><span class="image-tag">CONCEPT 0{i+1}</span></div><div class="project-meta"><h3>{p.title}</h3><span>{p.category}</span></div><p>{p.scope}</p></a></article>)}</div>
+<div class="projects-grid">{projects.map((p,i)=><article class="project" data-category={p.category}><a href={`/projects/${p.slug}/`} aria-label={`Explore ${p.title}, fictional concept`}><div class="image-wrap"><Photo name={`${p.image}-detail`} alt={`${p.title} — licensed stock inspiration crop, not a completed project`} /><span class="round-arrow" aria-hidden="true">↗</span><span class="image-tag">CONCEPT 0{i+1}</span></div><div class="project-meta"><h3>{p.title}</h3><span>{p.category}</span></div><p>{p.scope}</p></a></article>)}</div>
 <script>
  document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
  document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));

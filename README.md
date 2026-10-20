@@ -1,6 +1,6 @@
 # SPR Web Studio — Demo #1
 
-Premium landscaping/hardscaping portfolio website. **Alder & Stone is fictional.** Photography is licensed stock inspiration; project narratives are fictional concepts. No backend, analytics, fabricated testimonials, staff, awards, metrics or real service offer.
+Premium landscaping/hardscaping portfolio website. **V2 premium editorial refresh (2026-10-20):** richer landscape-first hero, different concept image crops, conversion-focused headline and CTA wording, responsive type refinements, subtle motion and a more detailed conceptual before/after illustration. See `docs/V2_RELEASE_NOTES.md`. **Alder & Stone is fictional.** Photography is licensed stock inspiration; project narratives are fictional concepts. No backend, analytics, fabricated testimonials, staff, awards, metrics or real service offer.
 
 ## Run locally
 
@@ -37,7 +37,7 @@ Astro 7.4, Tailwind CSS 4 via its Vite plugin, TypeScript strict, GSAP. Static H
 1. Update `src/data/site.ts`, then update the logo wordmark in Layout and narrative copy in pages. Search for `Alder`, `Stone`, `fictional`, `demo` to review every disclosure; retain disclosures while this remains a portfolio demo.
 2. Change CSS variables `--ink`, `--paper`, `--muted`, `--line`, and Tailwind theme colors in global.css. The design uses local system fonts.
 3. Replace images with approved assets in all three sizes (640/1280/1920, 3:2); update alt text and docs/ASSETS.md. Before/after artwork must remain labeled illustration unless replaced with a documented genuine pair.
-4. Set `SITE_URL` to your final origin at build time. It defaults to example.com deliberately; this must be changed before deployment so canonical/Open Graph URLs are correct.
+4. Set `SITE_URL` to your final origin at build time. This demo defaults to https://spr-landscaping-demo.pages.dev; change it when deploying under another domain so canonical/Open Graph URLs are correct.
 5. Run check/build/browser QA after content changes.
 
 ## Cloudflare Pages deployment
@@ -67,3 +67,7 @@ node tests/qa.mjs
 ```
 
 Browser QA expects the production preview running on port 4321 and an installed Google Chrome (`channel: 'chrome'`). Screenshots and machine-readable results are saved to docs. See docs/QA.md for actual observed results and limitations. Automated axe checks are useful coverage, not a guarantee of complete WCAG conformance.
+
+## V2 release and deployment
+
+After copying the V2 patch into your cloned GitHub repository, run `npm ci`, `npm run check`, and `npm run build` on Node >=22.22.0 (Node 24 recommended). Commit and Push to the `main` branch using GitHub Desktop; the already-connected Cloudflare Pages project will deploy automatically. Do not publish claims about real projects or enable live contact capture without a reviewed backend. See `docs/V2_RELEASE_NOTES.md` for the exact patch list and QA limitations.

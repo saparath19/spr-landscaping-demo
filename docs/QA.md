@@ -1,3 +1,5 @@
+> **V2 status (2026-10-20):** The build and browser evidence below was produced for the original V1 delivery and does **not** certify V2. For V2 see `V2_RELEASE_NOTES.md`, run `python tests/v2_static_audit.py`, then `npm run check`, `npm run build`, and `node tests/qa.mjs` with Node 24 and Chrome on your machine. The current environment could not install dependencies offline or navigate a local test page in Chromium.
+
 # QA results — 2026-10-18
 
 Environment: Windows, Node 24.21, npm 11.19, Astro 7.4.0, locally installed Google Chrome driven by Playwright. Tested production static build at http://127.0.0.1:4321.
