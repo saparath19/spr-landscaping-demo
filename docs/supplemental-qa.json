@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-18",
+  "checks": [
+    "normal-motion GSAP content visible after animation",
+    "invalid/incomplete form blocked without requests",
+    "mobile no-JavaScript navigation visible",
+    "unknown route returns 404",
+    "zero browser errors"
+  ]
+}

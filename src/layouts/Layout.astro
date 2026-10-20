@@ -1,0 +1,25 @@
+---
+import '../styles/global.css';
+import {brand} from '../data/site';
+interface Props { title: string; description: string; }
+const {title,description}=Astro.props;
+const nav=[['Services','/services/'],['Our approach','/about/'],['Selected work','/projects/']];
+const canonical=new URL(Astro.url.pathname,Astro.site);
+---
+<!doctype html><html lang="en"><head><script is:inline>document.documentElement.classList.add("js");</script><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title} | {brand.name}</title><meta name="description" content={description}/><meta name="robots" content="noindex, nofollow"/><link rel="canonical" href={canonical}/><meta property="og:title" content={`${title} | ${brand.name}`}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL('/images/hero-1280.webp',Astro.site)}/><meta name="twitter:card" content="summary_large_image"/><meta name="theme-color" content="#263d31"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/></head>
+<body><a class="skip" href="#main">Skip to content</a><div class="demo-bar"><span>SPR WEB STUDIO — DEMO NO. 01</span><span>Fictional landscape business · No real services offered</span></div>
+<header class="header"><a href="/" class="logo" aria-label="Alder and Stone home"><svg aria-hidden="true" width="32" height="38" viewBox="0 0 32 38" fill="none"><path d="M16 2 2 30h28L16 2Zm0 9v26M8 22l8 7 8-7" stroke="currentColor" stroke-width="1.2"/></svg><span>Alder <i>&</i> Stone<small>{brand.descriptor}</small></span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">Menu <span aria-hidden="true">☰</span></button><nav id="navigation" aria-label="Main navigation">{nav.map(([label,url])=><a href={url} aria-current={Astro.url.pathname.startsWith(url)?'page':undefined}>{label}</a>)}<a class="button nav-cta" href="/contact/" aria-current={Astro.url.pathname==='/contact/'?'page':undefined}>Request Free Estimate <span aria-hidden="true">↗</span></a></nav></header>
+<main id="main"><slot/></main>
+<footer><div class="footer-top"><div><a class="footer-brand" href="/">Alder & Stone</a><p>Thoughtful landscapes.<br/>A beautiful way to live outside.</p></div><div><p class="eyebrow">EXPLORE</p><a href="/services/">Services</a><a href="/about/">Our approach</a><a href="/projects/">Sample projects</a></div><div><p class="eyebrow">START A CONVERSATION</p><a href="/contact/">Try the estimate demo ↗</a><p>Designed for the U.S. residential market.<br/>No operating service area.</p></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SPR Web Studio · Fictional portfolio demo</span><a href="/privacy/">Privacy & image credits</a></div></footer>
+<script>
+ const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle');
+ const nav=document.querySelector<HTMLElement>('#navigation');
+ function closeMenu(){toggle?.setAttribute('aria-expanded','false');nav?.classList.remove('open');}
+ toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav?.classList.toggle('open',open);});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();toggle?.focus();}});
+ document.addEventListener('click',e=>{if(e.target instanceof Node&&!nav?.contains(e.target)&&!toggle?.contains(e.target))closeMenu();});
+ import {gsap} from 'gsap';
+ const mm=gsap.matchMedia();
+ mm.add('(prefers-reduced-motion: no-preference)',()=>{gsap.from('.hero-copy > *',{y:22,opacity:0,duration:0.85,stagger:0.12,ease:'power2.out',clearProps:'all'});});
+</script></body></html>
+

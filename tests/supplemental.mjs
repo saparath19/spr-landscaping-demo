@@ -1,0 +1,11 @@
+import {chromium} from '@playwright/test';
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+const browser=await chromium.launch({channel:'chrome'});
+const context=await browser.newContext({reducedMotion:'no-preference',viewport:{width:1440,height:1000}});
+const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:4321/');await page.waitForTimeout(1300);assert.equal(await page.locator('.hero h1').evaluate(el=>getComputedStyle(el).opacity),'1');await page.screenshot({path:'docs/screenshots/home-desktop-first-screen.png'});
+await page.goto('http://127.0.0.1:4321/contact/');await page.locator('[name=email]').fill('invalid');assert.equal(await page.locator('form').evaluate(f=>f.checkValidity()),false);const requests=[];page.on('request',r=>requests.push(r.url()));await page.getByRole('button',{name:'Preview estimate request'}).click();assert.equal(await page.locator('#form-result').isVisible(),false);assert.equal(requests.length,0);
+const nojsContext=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const nojs=await nojsContext.newPage();await nojs.goto('http://127.0.0.1:4321/');assert.equal(await nojs.getByRole('navigation',{name:'Main navigation'}).isVisible(),true);assert.equal(await nojs.getByRole('link',{name:'Selected work',exact:true}).isVisible(),true);
+const response=await page.request.get('http://127.0.0.1:4321/does-not-exist/');assert.equal(response.status(),404);assert.deepEqual(errors,[]);
+writeFileSync('docs/supplemental-qa.json',JSON.stringify({date:'2026-10-18',checks:['normal-motion GSAP content visible after animation','invalid/incomplete form blocked without requests','mobile no-JavaScript navigation visible','unknown route returns 404','zero browser errors']},null,2));await browser.close();console.log('Supplemental checks passed');

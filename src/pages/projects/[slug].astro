@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Photo from '../../components/Photo.astro';
+import CTA from '../../components/CTA.astro';
+import {projects} from '../../data/site';
+export function getStaticPaths(){return projects.map(project=>({params:{slug:project.slug},props:{project}}));}
+const {project}=Astro.props;
+---
+<Layout title={project.title} description={`${project.description} Fictional concept with stock photography.`}><section class="page-intro section"><a class="under-link" href="/projects/">← All concepts</a><p class="eyebrow">{project.category} · FICTIONAL CONCEPT</p><h1>{project.title}</h1><p>{project.description}</p></section><div class="wide-photo"><Photo name={project.image} alt={`${project.title}: stock inspiration, not our completed work`} eager/></div><section class="section intro"><p class="eyebrow">THE DESIGN BRIEF</p><div><h2>{project.scope}</h2><p>This illustrative brief explores how materials, circulation, and planting might support a more inviting outdoor experience. The accompanying image is an independent stock photograph, not a rendering of this concept.</p><p>No client, location, construction outcome, budget, or project timeline is claimed. A real project would require a site-specific design and professional review.</p></div></section><CTA title="Bring your own brief to the table."/></Layout>

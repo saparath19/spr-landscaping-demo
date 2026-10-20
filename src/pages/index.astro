@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Photo from '../components/Photo.astro';
+import CTA from '../components/CTA.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import {services} from '../data/site';
+---
+<Layout title="Landscapes for a life well lived" description="A premium landscaping and hardscaping website concept by SPR Web Studio. Explore a fictional design-build business, sample projects, and a private estimate demo.">
+<section class="hero"><Photo class="hero-photo" name="hero" alt="Architectural home with a pool and garden — stock design inspiration" eager/><div class="hero-shade"></div><div class="hero-copy"><p class="eyebrow">LANDSCAPE DESIGN · HARDSCAPING · OUTDOOR LIVING</p><h1>Outside,<br/><em>beautifully lived.</em></h1><p>Thoughtful landscapes. Timeless materials.<br/>A place that feels entirely your own.</p><div class="hero-actions"><a class="button light" href="/contact/">Request Free Estimate <span aria-hidden="true">↗</span></a><a class="text-link" href="/projects/">Explore the possibilities <span aria-hidden="true">↗</span></a></div></div><div class="hero-bottom"><span>DESIGNED AROUND THE WAY YOU LIVE</span><a href="#introduction">DISCOVER MORE <span aria-hidden="true">↓</span></a></div></section>
+<div class="service-ribbon"><span>Rooted in nature.</span><span>Refined by design.</span><span>Made for everyday living.</span></div>
+<section class="section intro" id="introduction"><p class="eyebrow">A NATURAL EXTENSION OF HOME</p><div><h2>Good design doesn’t stop<br/>at the <em>back door.</em></h2><div class="intro-bottom"><p>A garden should feel as considered as the home it surrounds. Our imagined approach brings landscape, stone, and outdoor living together — with room for the moments that matter.</p><a class="under-link" href="/about/">Discover our approach <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="services section"><div class="section-heading"><div><p class="eyebrow">WHAT WE BRING TO YOUR OUTDOORS</p><h2>Nature. Structure. <em>Harmony.</em></h2></div><a class="under-link" href="/services/">Explore our services ↗</a></div><div class="service-grid">{services.map((s,i)=><a class="service-card" href={`/services/#${s.id}`}><Photo name={s.image} alt={s.alt}/><div class="service-card-copy"><span>0{i+1}</span><h3>{s.title}</h3><span aria-hidden="true">↗</span></div></a>)}</div></section>
+<section class="section selected"><div class="section-heading"><div><p class="eyebrow">A FEW POSSIBILITIES</p><h2>Spaces with <em>a sense of place.</em></h2></div><a class="under-link" href="/projects/">View all concepts ↗</a></div><p class="section-note">Fictional concepts paired with licensed stock inspiration. These are not client projects.</p><ProjectGrid/></section>
+<BeforeAfter/>
+<section class="approach section"><div><p class="eyebrow">FROM FIRST THOUGHT TO FINAL DETAIL</p><h2>A clear path to<br/><em>your kind of outdoors.</em></h2><a class="under-link" href="/about/">The design-build approach ↗</a></div><ol class="steps"><li><span>01</span><div><h3>Listen & discover</h3><p>Start with your vision, your space, and what you want to feel when you step outside.</p></div></li><li><span>02</span><div><h3>Design with intention</h3><p>Bring the layout, materials, planting, and practical details into one considered plan.</p></div></li><li><span>03</span><div><h3>Bring it together</h3><p>A clear scope and thoughtful sequence turn a promising concept into a place to enjoy.</p></div></li></ol></section>
+<CTA title="Your next chapter starts outside." text="Have a space in mind? Explore how an estimate request could feel."/>
+</Layout>
